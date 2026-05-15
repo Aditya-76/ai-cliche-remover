@@ -11,10 +11,12 @@ export function SiteFooter() {
         </p>
 
         <a
-          href="mailto:aditya@superleap.com"
+          href="https://x.com/aditya7682"
+          target="_blank"
+          rel="noopener noreferrer"
           className="font-sans text-sm text-ink-soft underline-offset-4 transition-colors hover:text-oxblood hover:underline"
         >
-          aditya@superleap.com
+          @aditya7682
         </a>
 
         <p className="mt-2 font-sans text-xs tracking-wide text-ink-faint">
