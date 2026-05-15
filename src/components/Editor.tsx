@@ -15,6 +15,11 @@ import type { CleanResponse, Flagged } from "@/lib/types";
 const FREE_WORD_LIMIT = 2_000;
 const PAID_WORD_LIMIT = 10_000;
 
+// A deliberately AI-heavy paragraph so visitors can see the markup work
+// without having to paste anything of their own.
+const SAMPLE_TEXT =
+  "In today's fast-paced digital landscape, it's important to note that businesses must navigate the complexities of customer engagement. Furthermore, leveraging cutting-edge technology has become a game-changer for organizations looking to delve into new markets. Arguably, this paradigm shift represents a tapestry of opportunities — one that stands as a testament to human ingenuity. In conclusion, those who embark on this journey will unlock the power of true innovation.";
+
 function countWords(value: string): number {
   const trimmed = value.trim();
   if (!trimmed) return 0;
@@ -222,6 +227,15 @@ export function Editor({ isPaid }: EditorProps) {
               </span>
             </div>
           </div>
+          {!text && (
+            <button
+              type="button"
+              onClick={() => setText(SAMPLE_TEXT)}
+              className="self-start font-sans text-xs text-ink-soft underline decoration-rule-strong underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
+            >
+              Try with sample text
+            </button>
+          )}
           {atLimit && (
             <p className="font-sans text-xs text-oxblood">
               You&rsquo;ve reached the {wordLimit.toLocaleString()}-word limit
