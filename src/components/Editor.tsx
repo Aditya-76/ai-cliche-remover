@@ -4,10 +4,12 @@ import { useCallback, useMemo, useState, type ChangeEvent } from "react";
 import { Check, Copy, Pencil } from "lucide-react";
 
 import { Highlight } from "@/components/Highlight";
+import { Paywall } from "@/components/Paywall";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useUsageCount } from "@/lib/usage";
 import type { CleanResponse, Flagged } from "@/lib/types";
 
 const FREE_WORD_LIMIT = 2_000;
@@ -102,6 +104,10 @@ export function Editor({ isPaid }: EditorProps) {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
+  // Daily free-tier usage. Paid users skip the limit check entirely.
+  const { increment, isOverLimit } = useUsageCount();
+  const paywalled = !isPaid && isOverLimit;
+
   const wordLimit = isPaid ? PAID_WORD_LIMIT : FREE_WORD_LIMIT;
   const wordCount = useMemo(() => countWords(text), [text]);
   const atLimit = wordCount >= wordLimit;
@@ -122,7 +128,7 @@ export function Editor({ isPaid }: EditorProps) {
   );
 
   const handleClean = useCallback(async () => {
-    if (!text.trim() || loading) return;
+    if (!text.trim() || loading || paywalled) return;
     setLoading(true);
     setError(null);
     setCopied(false);
@@ -147,6 +153,8 @@ export function Editor({ isPaid }: EditorProps) {
       }
       setSubmittedText(sent);
       setResult(data as CleanResponse);
+      // A "use" is a successful cleanup — failed requests don't burn one.
+      if (!isPaid) increment();
     } catch {
       setError(
         "Couldn't reach the editor. Check your connection and try again.",
@@ -154,7 +162,7 @@ export function Editor({ isPaid }: EditorProps) {
     } finally {
       setLoading(false);
     }
-  }, [text, loading]);
+  }, [text, loading, paywalled, isPaid, increment]);
 
   const handleCopy = useCallback(async () => {
     if (!result?.rewritten) return;
@@ -166,6 +174,19 @@ export function Editor({ isPaid }: EditorProps) {
       setError("Couldn't reach the clipboard — copy it by hand for now.");
     }
   }, [result]);
+
+  const copyButton = (
+    <Button
+      variant="quiet"
+      size="lg"
+      onClick={handleCopy}
+      disabled={!result?.rewritten}
+      className="tracking-[0.04em]"
+    >
+      {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+      {copied ? "Copied" : "Copy rewritten"}
+    </Button>
+  );
 
   return (
     <TooltipProvider>
@@ -269,32 +290,28 @@ export function Editor({ isPaid }: EditorProps) {
 
           {/* the action bar — below the markup */}
           <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-3">
-              <Button
-                variant="ink"
-                size="lg"
-                onClick={handleClean}
-                disabled={loading || !text.trim()}
-                className="tracking-[0.04em]"
-              >
-                <Pencil className="size-4" />
-                {loading ? "Cleaning…" : "Clean it up"}
-              </Button>
-              <Button
-                variant="quiet"
-                size="lg"
-                onClick={handleCopy}
-                disabled={!result?.rewritten}
-                className="tracking-[0.04em]"
-              >
-                {copied ? (
-                  <Check className="size-4" />
-                ) : (
-                  <Copy className="size-4" />
+            {paywalled ? (
+              <>
+                <Paywall />
+                {result?.rewritten && (
+                  <div className="flex">{copyButton}</div>
                 )}
-                {copied ? "Copied" : "Copy rewritten"}
-              </Button>
-            </div>
+              </>
+            ) : (
+              <div className="flex flex-wrap items-center gap-3">
+                <Button
+                  variant="ink"
+                  size="lg"
+                  onClick={handleClean}
+                  disabled={loading || !text.trim()}
+                  className="tracking-[0.04em]"
+                >
+                  <Pencil className="size-4" />
+                  {loading ? "Cleaning…" : "Clean it up"}
+                </Button>
+                {copyButton}
+              </div>
+            )}
             {error && (
               <p role="alert" className="font-sans text-sm text-oxblood">
                 {error}
