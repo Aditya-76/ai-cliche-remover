@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Serif display + body — the editorial voice.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Grotesque — the UI chrome: labels, buttons, counts, tooltips.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "AI Cliché Remover",
+  title: "AI Cliché Remover — stop sounding like a robot",
   description:
-    "Paste text, get every AI cliché and tell-tale phrase highlighted, with one-click rewrites.",
+    "Paste your draft and see every AI cliché, hedge, empty transition, and rhythm tell marked up in the margin — like an editor went at it with a red pencil.",
 };
 
 export default function RootLayout({
@@ -24,12 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${spaceGrotesk.variable}`}
+    >
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

@@ -3,80 +3,78 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+/* --------------------------------------------------------------------------
+   AI Cliché Remover — editorial / literary theme
+   Paper + ink, a single committed accent (oxblood), and four editor's-mark
+   colours for the highlight types. Substack meets a fountain-pen brand.
+-------------------------------------------------------------------------- */
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+:root {
+  --radius: 0.25rem;
+
+  /* Surfaces */
+  --paper: #fbf8f3;        /* the off-white desk */
+  --sheet: #fffdf8;        /* a sheet of paper — a hair brighter than the desk */
+  --ink: #23201b;          /* deep, warm ink for body text */
+  --ink-soft: #6f6557;     /* faded ink for secondary text */
+  --ink-faint: #9b917f;    /* hairline ink for the quietest labels */
+  --rule: #e6ddcc;         /* soft border / ruled line */
+  --rule-strong: #d8ccb4;  /* the hairline edge of a sheet */
+
+  /* Brand accent — oxblood, committed to */
+  --oxblood: #7a2e2a;
+  --oxblood-deep: #5f211e;
+
+  /* Editor's marks */
+  --mark-cliche: #b23a3a;      /* red pencil */
+  --mark-hedge: #d9c14e;       /* yellow legal-pad highlighter */
+  --mark-transition: #2f5fa6;  /* blue ballpoint */
+  --mark-rhythm: #7d4ea6;      /* purple felt-tip */
+
+  /* shadcn semantic tokens, remapped onto the editorial palette */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--sheet);
+  --card-foreground: var(--ink);
+  --popover: #fffdf8;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #f7f2e7;
+  --secondary: #efe8d9;
+  --secondary-foreground: var(--ink);
+  --muted: #efe8d9;
+  --muted-foreground: var(--ink-soft);
+  --accent: #efe6d4;
+  --accent-foreground: var(--oxblood-deep);
+  --destructive: #a32f2a;
+  --border: var(--rule);
+  --input: var(--rule-strong);
+  --ring: var(--oxblood);
+  --chart-1: var(--mark-cliche);
+  --chart-2: var(--mark-hedge);
+  --chart-3: var(--mark-transition);
+  --chart-4: var(--mark-rhythm);
+  --chart-5: var(--oxblood);
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: #f7f2e7;
+  --sidebar-accent: #efe6d4;
+  --sidebar-accent-foreground: var(--oxblood-deep);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--oxblood);
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-grotesk), ui-monospace, monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -108,13 +106,168 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* the editorial palette, exposed as Tailwind utilities */
+  --color-paper: var(--paper);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-oxblood: var(--oxblood);
+  --color-oxblood-deep: var(--oxblood-deep);
+  --color-mark-cliche: var(--mark-cliche);
+  --color-mark-hedge: var(--mark-hedge);
+  --color-mark-transition: var(--mark-transition);
+  --color-mark-rhythm: var(--mark-rhythm);
+
+}
+
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.2em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/40;
   }
+
+  html {
+    background-color: var(--paper);
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground font-serif antialiased;
+    background: transparent;
+    font-feature-settings: "kern", "liga";
+    letter-spacing: 0.005em;
+  }
+
+  /* Subtle paper-grain noise — fixed, non-interactive, sits above the
+     desk colour but behind all content. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--mark-hedge) 55%, transparent);
+    color: var(--ink);
+  }
+
+  ::placeholder {
+    color: var(--ink-faint);
+  }
+}
+
+@layer components {
+  /* A sheet of paper: brighter than the desk, hairline edge, soft lift. */
+  .paper-sheet {
+    background-color: var(--sheet);
+    border: 1px solid var(--rule-strong);
+    box-shadow:
+      0 1px 0 rgba(35, 32, 27, 0.02),
+      0 14px 30px -20px rgba(35, 32, 27, 0.3);
+  }
+
+  /* --- Editor's marks --------------------------------------------------
+     Each flagged phrase is wrapped in one of these. They read like marks
+     made on paper, not UI alert chips. */
+  .mark {
+    cursor: help;
+    background-color: transparent;
+    color: inherit;
+    border-radius: 1.5px;
+    transition:
+      background-color 0.16s ease,
+      color 0.16s ease;
+    animation: mark-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: calc(var(--mark-i, 0) * 55ms);
+  }
+
+  /* red pencil — a wavy correction underline */
+  .mark-cliche {
+    color: color-mix(in srgb, var(--mark-cliche) 78%, var(--ink));
+    text-decoration: underline wavy
+      color-mix(in srgb, var(--mark-cliche) 72%, transparent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .mark-cliche:hover {
+    background-color: color-mix(in srgb, var(--mark-cliche) 14%, transparent);
+  }
+
+  /* yellow legal-pad highlighter — a flat wash of colour */
+  .mark-hedge {
+    background-color: color-mix(in srgb, var(--mark-hedge) 52%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--mark-hedge) 32%, transparent);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.04em 0.14em;
+  }
+  .mark-hedge:hover {
+    background-color: color-mix(in srgb, var(--mark-hedge) 78%, transparent);
+  }
+
+  /* blue ballpoint — a firm, solid underline */
+  .mark-transition {
+    color: color-mix(in srgb, var(--mark-transition) 82%, var(--ink));
+    text-decoration: underline solid var(--mark-transition);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .mark-transition:hover {
+    background-color: color-mix(in srgb, var(--mark-transition) 12%, transparent);
+  }
+
+  /* purple felt-tip — a broad, soft stroke that doesn't skip ink */
+  .mark-rhythm {
+    color: color-mix(in srgb, var(--mark-rhythm) 72%, var(--ink));
+    text-decoration: underline solid
+      color-mix(in srgb, var(--mark-rhythm) 60%, transparent);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 2px;
+    text-decoration-skip-ink: none;
+  }
+  .mark-rhythm:hover {
+    background-color: color-mix(in srgb, var(--mark-rhythm) 14%, transparent);
+  }
+
+  /* The output sheet's gentle entrance. */
+  .sheet-rise {
+    animation: sheet-rise 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark,
+  .sheet-rise {
+    animation: none !important;
   }
 }

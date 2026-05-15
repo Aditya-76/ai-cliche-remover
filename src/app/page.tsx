@@ -1,32 +1,35 @@
-import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { cookies } from "next/headers";
 
-export default function Home() {
+import { Editor } from "@/components/Editor";
+
+export default async function Page() {
+  // Free tier vs. paid tier is read from a simple "paid" cookie.
+  const cookieStore = await cookies();
+  const isPaid = cookieStore.get("paid")?.value === "true";
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-8 text-center">
-      <div className="flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm text-muted-foreground">
-        <Sparkles className="size-4" />
-        Next.js 15 · TypeScript · Tailwind v4 · shadcn/ui
-      </div>
-      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-        AI Cliché Remover
-      </h1>
-      <p className="max-w-md text-balance text-muted-foreground">
-        Paste text, get every AI cliché and tell-tale phrase highlighted, with
-        one-click rewrites. The scaffold is ready — start building.
-      </p>
-      <div className="flex gap-3">
-        <Button>Get started</Button>
-        <Button variant="outline" asChild>
-          <a
-            href="https://nextjs.org/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Docs
-          </a>
-        </Button>
-      </div>
+    <main className="relative mx-auto w-full max-w-[1520px] px-6 pb-24 pt-14 sm:px-10 lg:pt-20">
+      <header className="mx-auto mb-12 flex max-w-[720px] flex-col items-center text-center lg:mb-16">
+        <span className="font-sans text-xs uppercase tracking-[0.32em] text-ink-faint">
+          An editorial tool
+        </span>
+        <h1 className="mt-4 font-serif text-[2.6rem] font-light leading-[1.08] text-ink sm:text-[3.4rem]">
+          The AI Cliché Remover
+        </h1>
+        <p className="mt-4 max-w-[34rem] font-serif text-lg italic leading-relaxed text-ink-soft">
+          Paste your draft. Get every cliché, hedge, empty transition, and
+          rhythm tell marked up in the margin — then copy back a version that
+          still sounds like you wrote it.
+        </p>
+        <div className="mt-7 h-px w-16 bg-rule-strong" />
+      </header>
+
+      <Editor isPaid={isPaid} />
+
+      <footer className="mx-auto mt-16 max-w-[720px] text-center font-sans text-xs text-ink-faint">
+        Marked up by Claude Haiku. Your draft is only sent off when you ask for
+        the markup.
+      </footer>
     </main>
   );
 }
